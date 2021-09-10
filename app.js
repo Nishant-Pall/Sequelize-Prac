@@ -15,6 +15,17 @@ app.post('/users', async (req, res) => {
 	}
 });
 
+app.get('/users', async (req, res) => {
+	try {
+		const users = await User.findAll();
+
+		return res.json(users);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ error: 'Something went wrong' });
+	}
+});
+
 app.listen({ port: 5000 }, async () => {
 	console.log(`server listening to 5000`);
 	// looks at model and creates db
