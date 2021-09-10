@@ -9,8 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    // destructure user model
+    static associate({ User }) {
       // define association here
+      // the post belongs, many to one relation
+      this.belongsTo(
+        User,
+        // by default sequelize looks for UserId as foreignKey
+        // that is <Model><PrimaryKey>
+        { foreignKey: `userId` }
+      );
     }
   };
   Post.init({
