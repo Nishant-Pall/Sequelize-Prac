@@ -1,6 +1,6 @@
 'use strict';
 
-const { DataTypes } = require("sequelize/types");
+const { DataTypes } = require("sequelize");
 
 module.exports = {
   // up is executed when we run the migration
