@@ -42,6 +42,37 @@ app.get('/users/:uuid', async (req, res) => {
 	}
 });
 
+app.delete('/users/:uuid', async (req, res) => {
+	try {
+		const user = await User.findOne();
+		// delete user
+		await user.destroy();
+		return res.json({ message: 'user deleted' });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ error: 'Something went wrong' });
+	}
+});
+
+// Route to update user attributes
+app.put('/users/:uuid', async (req, res) => {
+	const uuid = req.params.uuid;
+	const { name, email, role } = req.body;
+	try {
+		const user = await User.findOne({ where: { uuid } });
+		user.name = name;
+		user.email = email;
+		user.role = role;
+
+		await user.save();
+
+		return res.json(user);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ error: 'Something went wrong' });
+	}
+});
+
 app.post('/posts', async (req, res) => {
 	const { userUuid, body } = req.body;
 
