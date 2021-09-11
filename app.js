@@ -61,6 +61,19 @@ app.post('/posts', async (req, res) => {
 	}
 });
 
+
+app.get('/posts', async (req, res) => {
+	try {
+		// will return all posts with the user model as well
+		// show User as user
+		const post = await Post.findAll({ include: [{ model: User, as: 'user' }] });
+		return res.json(post);
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json(err);
+	}
+});
+
 app.listen({ port: 5000 }, async () => {
 	console.log(`server listening to 5000`);
 	// looks at model and creates db

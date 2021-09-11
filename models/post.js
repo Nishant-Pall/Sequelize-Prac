@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         User,
         // by default sequelize looks for UserId as foreignKey
         // that is <Model><PrimaryKey>
-        { foreignKey: `userId` }
+        // set alias of User as user
+        { foreignKey: `userId`, as: 'user' }
       );
     }
     toJSON() {
