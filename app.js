@@ -66,7 +66,8 @@ app.get('/posts', async (req, res) => {
 	try {
 		// will return all posts with the user model as well
 		// show User as user
-		const post = await Post.findAll({ include: [{ model: User, as: 'user' }] });
+		// const post = await Post.findAll({ include: [{ model: User, as: 'user' }] });
+		const post = await Post.findAll({ include: ['user'] });
 		return res.json(post);
 	} catch (err) {
 		console.error(err);
