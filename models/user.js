@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // user has many posts
       this.hasMany(
         Post,
-        { foreignKey: `userId` }
+        { foreignKey: `userId`, as: 'posts' }
       );
     }
     // hide id from response
